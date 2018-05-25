@@ -148,6 +148,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chip8run.cpp" />
+    <ClCompile Include="VM.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Instruction.h" />
+    <ClInclude Include="Memory.h" />
+    <ClInclude Include="VM.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
