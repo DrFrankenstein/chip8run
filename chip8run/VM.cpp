@@ -1,6 +1,12 @@
 #include "VM.hpp"
 #include "Instruction.hpp"
 
+#include <algorithm>
+
+using std::uint8_t;
+using std::uint16_t;
+using std::copy;
+
 namespace Chip8 {
 
 VM::VM()
@@ -27,22 +33,77 @@ void VM::run()
 
 void VM::sys(VM::Address address)
 {
+	// no-op for now
 }
 
-void VM::jp(VM::Address address) {}
-void VM::jpBased(VM::Address address) {}
-void VM::call(VM::Address address) {}
-void VM::ret() {}
+void VM::jp(VM::Address address) 
+{
+	this->pc = address;
+}
 
-void VM::seImm(VM::Register reg, VM::Immediate value) {}
-void VM::seReg(VM::Register left, VM::Register right) {}
-void VM::sneImm(VM::Register reg, VM::Immediate value) {}
-void VM::sneReg(VM::Register left, VM::Register right) {}
+void VM::jpBased(VM::Address address) 
+{
+	this->pc = this->v[0] + address;
+}
 
-void VM::ldImm(VM::Register dst, VM::Immediate val) {}
-void VM::ldReg(VM::Register dst, VM::Register src) {}
-void VM::ldI(VM::Address address) {}
-void VM::storeMem(VM::Register end) {}
+void VM::call(VM::Address address) 
+{
+	this->sp += 2;
+	this->mem.set(this->sp, this->pc);
+
+	this->pc = address;
+}
+
+void VM::ret()
+{
+	this->pc = this->mem.get16(this->sp);
+	this->sp -= 2;
+}
+
+void VM::seImm(VM::Register reg, VM::Immediate value)
+{
+	if (this->v[reg] == value)
+		this->pc += 2;
+}
+
+void VM::seReg(VM::Register left, VM::Register right) 
+{
+	if (this->v[left] == this->v[right])
+		this->pc += 2;
+}
+
+void VM::sneImm(VM::Register reg, VM::Immediate value) 
+{
+	if (this->v[reg] != value)
+		this->pc += 2;
+}
+
+void VM::sneReg(VM::Register left, VM::Register right) 
+{
+	if (this->v[left] != this->v[right])
+		this->pc += 2;
+}
+
+void VM::ldImm(VM::Register dst, VM::Immediate val)
+{
+	this->v[dst] = val;
+}
+
+void VM::ldReg(VM::Register dst, VM::Register src) 
+{
+	this->v[dst] = this->v[src];
+}
+
+void VM::ldI(VM::Address address) 
+{
+	this->i = address;
+}
+
+void VM::storeMem(VM::Register end) 
+{
+	copy(this->v.begin(), this->v.begin() + end, this->mem.begin8() + this->i);
+}
+
 void VM::ldMem(VM::Register end) {}
 
 void VM::getDt(VM::Register dst) {}

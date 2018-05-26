@@ -40,6 +40,16 @@ public:
 	{
 		return *reinterpret_cast<std::uint16_t*>(this->data + address);
 	}
+
+	void set(std::uint16_t address, std::uint8_t value)
+	{
+		this->data[address] = value;
+	}
+
+	void set(std::uint16_t address, std::uint16_t value)
+	{
+		*reinterpret_cast<std::uint16_t*>(this->data + address) = value;
+	}
 };
 
 }
