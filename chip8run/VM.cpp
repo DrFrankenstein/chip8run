@@ -1,5 +1,5 @@
-#include "VM.h"
-#include "Instruction.h"
+#include "VM.hpp"
+#include "Instruction.hpp"
 
 namespace Chip8 {
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Memory.h"
-#include "Instruction.h"
+#include "Memory.hpp"
+#include "Instruction.hpp"
 
 #include <cstdint>
 #include <array>

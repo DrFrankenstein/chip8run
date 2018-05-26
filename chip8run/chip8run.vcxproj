@@ -151,9 +151,9 @@
     <ClCompile Include="VM.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Instruction.h" />
-    <ClInclude Include="Memory.h" />
-    <ClInclude Include="VM.h" />
+    <ClInclude Include="Instruction.hpp" />
+    <ClInclude Include="Memory.hpp" />
+    <ClInclude Include="VM.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
