@@ -2,31 +2,36 @@
 
 #include "Memory.hpp"
 #include "Instruction.hpp"
+#include "InstructionDecoder.hpp"
 
 #include <cstdint>
 #include <array>
 
 namespace Chip8 {
 
-class VM
+class VM : InstructionDecoder<VM>
 {
+	friend class InstructionDecoder<VM>;
+
 	std::array<std::uint8_t, 16> v {};
 	std::uint16_t i {}, pc {0x200};
 	std::uint8_t sp {}, dt {}, st {};
 	Memory<0x1000> mem {};
 
+	bool running;
+
 public:
 	VM();
 
-	Instruction fetchInstruction();
+	void run();
 
 private:
+	Instruction fetchInstruction();
+
 	using Address = Instruction::Address;
 	using Register = Instruction::Register;
 	using Immediate = Instruction::Immediate;
 	using Parameter = Instruction::Parameter;
-
-	void execute(Instruction instruction);
 
 	void sys(Address address);
 	void jp(Address address);

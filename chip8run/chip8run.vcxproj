@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Instruction.hpp" />
+    <ClInclude Include="InstructionDecoder.hpp" />
     <ClInclude Include="Memory.hpp" />
     <ClInclude Include="VM.hpp" />
   </ItemGroup>
