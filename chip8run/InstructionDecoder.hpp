@@ -95,7 +95,7 @@ protected:
 				break;
 
 			case 6:
-				impl().shr(instruction.reg1(), instruction.reg2());
+				impl().shr(instruction.reg1());
 				break;
 
 			case 7:
@@ -103,7 +103,7 @@ protected:
 				break;
 
 			case 0xE:
-				impl().shl(instruction.reg1(), instruction.reg2());
+				impl().shl(instruction.reg1());
 				break;
 
 			default:

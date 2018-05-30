@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <array>
+#include <random>
 
 namespace Chip8 {
 
@@ -19,6 +20,8 @@ class VM : InstructionDecoder<VM>
 	Memory<0x1000> mem {};
 
 	bool running;
+
+	std::default_random_engine rng;
 
 public:
 	VM();
@@ -63,8 +66,8 @@ private:
 	void bitOr(Register dst, Register bits);
 	void bitAnd(Register dst, Register mask);
 	void bitXor(Register dst, Register value);
-	void shr(Register dst, Register shift);
-	void shl(Register dst, Register shift);
+	void shr(Register dst);
+	void shl(Register dst);
 
 	void rnd(Register dst, Immediate mask);
 
